@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ContactList from './ContactList/ContactList';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
-import './App.css';
+import css from './App.module.css';
+import PropTypes from 'prop-types';
 
 export const App = () => {
   const [contacts, setContacts] = useState(() => {
@@ -43,12 +44,17 @@ export const App = () => {
 
 
     return (
-          <div className='main'>
-            <h1 className='title'>Phonebook</h1>
+          <div className={css.main}>
+            <h1 className={css.title}>Phonebook</h1>
             <ContactForm addContact={handleSubmitForm} />
-            <h2 className='title'>Contacts</h2>
+            <h2 className={css.title}>Contacts</h2>
             <Filter value={filter} onChange={onChangeFilter} />
             <ContactList contacts={visibleContacts} onDelete={deleteContact} />
           </div>
         );
 }
+
+App.propTypes = {
+  contacts: PropTypes.array,
+  filter: PropTypes.string,
+}; 
