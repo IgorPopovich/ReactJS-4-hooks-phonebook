@@ -22,13 +22,10 @@ export const App = () => {
   }
 
   const handleSubmitForm = (data) => {
-    for (let a of contacts) {
-      if (a.name.includes(data.name)) {
+    if (contacts.find(contact => contact.name.toLowerCase() === data.name.toLowerCase())) {
         alert(`${data.name} is already in contacts`)
         return;
-      }
     }
-
     setContacts([data, ...contacts])
   }
 
