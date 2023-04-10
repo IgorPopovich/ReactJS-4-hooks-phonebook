@@ -12,9 +12,14 @@ export const App = () => {
     return parsedContacts || []
   })
   const [filter, setFilter] = useState('')
+
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts))
+  }, [contacts]);
   
   const deleteContact = (contactId) => {
-    setContacts(contacts.filter(contact => contact.id !== contactId))
+    // setContacts(contacts.filter(contact => contact.id !== contactId))
+    setContacts((prevState) => prevState.filter(contact => contact.id !== contactId))
   }
 
   const onChangeFilter = (event) => {
@@ -26,12 +31,9 @@ export const App = () => {
         alert(`${data.name} is already in contacts`)
         return;
     }
-    setContacts([data, ...contacts])
+    // setContacts([data, ...contacts])
+    setContacts((prevState) => [data, ...prevState]);
   }
-
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts))
-  }, [contacts]);
 
     const normalSize = filter.toLocaleLowerCase()
     const visibleContacts = contacts.filter(contact => 
